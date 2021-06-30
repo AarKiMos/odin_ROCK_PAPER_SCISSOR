@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tic Tac Toe</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <script>
+            function computerPlay() {
+                let randomNumber = Math.floor(Math.random() * 3);
+                const POSSIBLE_OUTPUTS = ["ROCK", "PAPER", "SCISSOR"];
+
+                return POSSIBLE_OUTPUTS[randomNumber];
+            }
+
+            function playRound(playerSelection, computerSelection) {
+                if (playerSelection === "ROCK") {
+                    if (computerSelection === "ROCK")
+                        return "Stale: Both selected ROCK";
+                    if (computerSelection === "PAPER")
+                        return "You Lose! PAPER beats ROCK";
+                    if (computerSelection === "SCISSOR")
+                        return "You Won! ROCK beats SCISSOR";
+                } else if (playerSelection === "PAPER") {
+                    if (computerSelection === "PAPER")
+                        return "Stale: Both selected PAPER";
+                    if (computerSelection === "ROCK")
+                        return "You Won! PAPER beats ROCK";
+                    if (computerSelection === "SCISSOR")
+                        return "You Lose! SCISSOR beats PAPER";
+                } else if (playerSelection === "SCISSOR") {
+                    if (computerSelection === "SCISSOR")
+                        return "Stale: Both selected SCISSOR";
+                    if (computerSelection === "PAPER")
+                        return "You Won! SCISSOR beats PAPER";
+                    if (computerSelection === "ROCK")
+                        return "You Lose! ROCK beats SCISSOR";
+                } 
+            }
+
+            function game() {
+                let playerScore = 0,
+                    computerScore = 0,
+                    i = 1;
+
+                while (i < 6) {
+                    console.log("Round " + i);
+
+                    let computerSelection = computerPlay();
+                    let playerSelection = prompt("Enter Your Selection").toUpperCase();
+                    if (playerSelection != "ROCK" && playerSelection != "PAPER" && playerSelection != "SCISSOR") {
+                        alert("Invalid Selection");
+                        continue;
+                    }
+
+                    let result = (playRound(playerSelection, computerSelection));
+                    console.log(result);
+
+                    if(result[4] === "W") playerScore++;
+                    else if (result[4] === "L") computerScore++;
+
+                    i++;
+                }
+
+                if (playerScore > computerScore) console.log("Player Won!");
+                else if (playerScore === computerScore) console.log("It's a Stale");
+                else console.log("Computer Won!");
+            }
+
+            game();
+ 
+        </script>
+    </body>
+</html>
