@@ -3,8 +3,30 @@
     <head>
         <title>AarKiMos Rock Paper Scissor</title>
         <meta charset="UTF-8" />
+        <link href="rpsStyleSheet.css" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Anton&display=swap"
+            rel="stylesheet"
+        />
     </head>
     <body>
+        <div class="header">AarKiMos' Rock Paper Scissor</div>
+        <div class="scoreBar">
+            <div id="playerScore">0</div>
+            <div id="resultDiv"></div>
+            <div id="computerScore">0</div>
+        </div>
+
+        <div class="playButtons">
+            <button class="playerHand" id="rockBtn">ROCK</button>
+            <button class="playerHand" id="paperBtn">PAPER</button>
+            <button class="playerHand" id="scissorBtn">SCISSOR</button>
+        </div>
+
+        <button class="resetButton" id="resetBtn">RESET SCORES</button>
+
         <script>
             function computerPlay() {
                 let randomNumber = Math.floor(Math.random() * 3);
@@ -35,10 +57,13 @@
                         return "You Won! SCISSOR beats PAPER";
                     if (computerSelection === "ROCK")
                         return "You Lose! ROCK beats SCISSOR";
-                } 
+                }
             }
 
-            function game() {
+            /**  
+             *   
+
+                function game() {
                 let playerScore = 0,
                     computerScore = 0,
                     i = 1;
@@ -65,10 +90,62 @@
                 if (playerScore > computerScore) console.log("Player Won!");
                 else if (playerScore === computerScore) console.log("It's a Stale");
                 else console.log("Computer Won!");
-            }
+            } 
 
-            game();
- 
+            game(); */
+
+            let result = document.querySelector("#resultDiv");
+            let buttons = document.querySelectorAll(".playerHand");
+            let resetButton = document.querySelector(".resetButton");
+            let ps = document.querySelector("#playerScore");
+            let cs = document.querySelector("#computerScore");
+
+            let playerScore = 0,
+                computerScore = 0;
+
+            buttons.forEach((button) => {
+                button.addEventListener("click", (e) => {
+                    let playResult = playRound(
+                        e.target.innerText,
+                        computerPlay()
+                    );
+
+                    let resultText = document.createElement("div");
+                    resultText.innerText = playResult;
+                    result.insertBefore(resultText, result.firstChild);
+
+                    if (playResult.slice(0, 7) === "You Won") playerScore++;
+                    else if (playResult.slice(0, 7) === "You Los")
+                        computerScore++;
+
+                    ps.innerText =`${playerScore}`;
+                    cs.innerText =`${computerScore}`;
+
+                    if (playerScore === 5 || computerScore === 5) {
+                        buttons.forEach((button) => {
+                            button.setAttribute("disabled", true);
+                            button.classList.add("disabledButtons");
+                        });
+                        playerScore > computerScore
+                            ? alert("Player Won!!!")
+                            : alert("Computer Won!!!");
+                    }
+                });
+            });
+
+            resetButton.addEventListener("click", () => {
+                buttons.forEach((button) => {
+                    button.removeAttribute("disabled");
+                    button.classList.remove("disabledButtons");
+                });
+                playerScore = 0;
+                computerScore = 0;
+                ps.innerText = `${playerScore}`;
+                cs.innerText = `${computerScore}`;
+                while (result.hasChildNodes()) result.firstChild.remove();
+            });
+
+            // TODO: clean this code you can do better than this
         </script>
     </body>
 </html>

@@ -1,0 +1,75 @@
+body {
+    background-color: blue;
+}
+
+.header {
+    text-align: center;
+    color: white;
+    font-family: 'Anton', 'Courier New', Courier, monospace;
+    font-size: 80px;
+    height: 120px;
+    line-height: 120px;
+}
+
+.scoreBar{
+display: flex;
+height: 300px;
+justify-content: space-around;
+align-items: center;
+}
+
+#resultDiv {
+    height: 250px;
+    width: 400px;
+    background-color: white;
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Anton', 'Courier New', Courier, monospace;
+    line-height: 1.25;
+    padding: 5px;
+    overflow: scroll;
+}
+
+
+#playerScore, #computerScore {
+    height: 250px;
+    width: 250px;
+    background-color: white;
+    text-align: center;
+    font-size: 200px;
+    font-family: 'Anton', 'Courier New', Courier, monospace;
+    line-height: 1.25;
+    color: green;
+}
+
+
+
+.playButtons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 200px;
+}
+
+.playerHand, .resetButton{
+    width: 150px;
+    Height: 50px;
+    border-radius: 0;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.5);
+    font-family: 'Anton', 'Courier New', Courier, monospace;
+    color:white;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.disabledButtons {
+    background-color: rgba(255, 0, 0, 1);
+}
+
+.resetButton {
+    position: fixed;
+    right: 5px;
+    bottom: 5px;
+
+}
